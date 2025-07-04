@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vision Photography | Neon Visuals</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap">
+    <title>John Doe Photography | Visual Storytelling</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
-            --dark: #0a0a0a;
-            --darker: #050505;
-            --neon-pink: #ff2a6d;
-            --neon-blue: #05d9e8;
-            --neon-purple: #d300c5;
-            --neon-cyan: #00f1ff;
-            --shadow: 0 0 10px rgba(5, 217, 232, 0.5);
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --accent: #f39c12;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
@@ -26,63 +26,34 @@
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            color: white;
+            color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
-            background-color: var(--darker);
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(255, 42, 109, 0.15) 0%, transparent 30%),
-                radial-gradient(circle at 80% 70%, rgba(5, 217, 232, 0.15) 0%, transparent 30%);
+            background-color: #f9f9f9;
         }
         
-        /* Neon Grid Background */
-        .neon-grid {
-            position: fixed;
+        /* Parallax Header */
+        .parallax {
+            perspective: 1px;
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        .parallax__layer {
+            position: absolute;
             top: 0;
+            right: 0;
+            bottom: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)),
-                linear-gradient(90deg, var(--darker) 21px, transparent 1%) center,
-                linear-gradient(var(--darker) 21px, transparent 1%) center,
-                var(--neon-blue);
-            background-size: 22px 22px;
-            z-index: -2;
-            opacity: 0.3;
         }
         
-        /* Neon Glow Effects */
-        .neon-glow {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-            opacity: 0.3;
+        .parallax__layer--base {
+            transform: translateZ(0);
         }
         
-        .glow-pink {
-            background: var(--neon-pink);
-            top: -100px;
-            left: -100px;
-            animation: float-glow 8s ease-in-out infinite;
-        }
-        
-        .glow-blue {
-            background: var(--neon-blue);
-            bottom: -100px;
-            right: -100px;
-            animation: float-glow 10s ease-in-out infinite reverse;
-        }
-        
-        @keyframes float-glow {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(50px, 50px); }
-            50% { transform: translate(0, 100px); }
-            75% { transform: translate(-50px, 50px); }
-            100% { transform: translate(0, 0); }
+        .parallax__layer--back {
+            transform: translateZ(-1px) scale(2);
         }
         
         header {
@@ -93,8 +64,22 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            color: white;
             padding: 0 20px;
             overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1493863641943-9b68992a8d07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
         }
         
         .hero-content {
@@ -105,74 +90,56 @@
         }
         
         h1, h2, h3, h4 {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
         }
         
         .logo {
             font-size: 4rem;
             margin-bottom: 0;
-            color: white;
-            text-shadow: 
-                0 0 10px var(--neon-blue),
-                0 0 20px var(--neon-blue),
-                0 0 30px var(--neon-blue);
-            animation: neon-pulse 2s infinite alternate;
-        }
-        
-        @keyframes neon-pulse {
-            from {
-                text-shadow: 
-                    0 0 10px var(--neon-blue),
-                    0 0 20px var(--neon-blue),
-                    0 0 30px var(--neon-blue);
-            }
-            to {
-                text-shadow: 
-                    0 0 15px var(--neon-blue),
-                    0 0 25px var(--neon-cyan),
-                    0 0 35px var(--neon-blue);
-            }
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background: linear-gradient(to right, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeInDown 1.5s ease;
         }
         
         .tagline {
             font-size: 1.8rem;
             margin-top: 0;
             font-weight: 300;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 5px var(--neon-cyan);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.5s ease;
+            animation-delay: 0.3s;
+            animation-fill-mode: both;
         }
         
         .btn {
             display: inline-block;
-            background: transparent;
-            color: var(--neon-pink);
+            background: var(--secondary);
+            color: white;
             padding: 15px 40px;
             text-decoration: none;
             border-radius: 50px;
             margin-top: 30px;
             transition: var(--transition);
             font-weight: 600;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             font-size: 0.9rem;
-            border: 2px solid var(--neon-pink);
-            box-shadow: 
-                0 0 10px var(--neon-pink),
-                inset 0 0 10px var(--neon-pink);
+            box-shadow: var(--shadow);
+            animation: fadeIn 2s ease;
+            animation-delay: 0.6s;
+            animation-fill-mode: both;
             position: relative;
             overflow: hidden;
         }
         
         .btn:hover {
-            color: var(--darker);
-            background: var(--neon-pink);
-            box-shadow: 
-                0 0 20px var(--neon-pink),
-                inset 0 0 20px var(--neon-pink);
+            background: #c0392b;
             transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
         }
         
         .btn:after {
@@ -191,23 +158,23 @@
             transform: translateX(0);
         }
         
-        /* Navigation */
+        /* Glass Morphism Navigation */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 20px 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            border-bottom: 1px solid rgba(255, 42, 109, 0.3);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: var(--transition);
         }
         
         nav.scrolled {
-            background: rgba(5, 5, 5, 0.95);
+            background: rgba(44, 62, 80, 0.9);
             padding: 15px 0;
         }
         
@@ -231,9 +198,6 @@
             transition: var(--transition);
             padding: 5px 10px;
             position: relative;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
         }
         
         nav ul li a:after {
@@ -241,7 +205,7 @@
             position: absolute;
             width: 0;
             height: 2px;
-            background: var(--neon-cyan);
+            background: var(--accent);
             bottom: 0;
             left: 0;
             transition: var(--transition);
@@ -252,11 +216,10 @@
         }
         
         nav ul li a:hover {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 5px var(--neon-cyan);
+            color: var(--accent);
         }
         
-        /* Mobile Menu */
+        /* Hamburger Menu for Mobile */
         .menu-toggle {
             display: none;
             cursor: pointer;
@@ -265,18 +228,16 @@
             top: 20px;
             right: 20px;
             z-index: 1001;
-            background: rgba(255, 42, 109, 0.3);
+            background: rgba(0,0,0,0.5);
             border-radius: 5px;
-            border: 1px solid var(--neon-pink);
         }
         
         .hamburger {
             width: 30px;
             height: 3px;
-            background: var(--neon-pink);
+            background: white;
             position: relative;
             transition: var(--transition);
-            box-shadow: 0 0 5px var(--neon-pink);
         }
         
         .hamburger:before,
@@ -285,9 +246,8 @@
             position: absolute;
             width: 30px;
             height: 3px;
-            background: var(--neon-pink);
+            background: white;
             transition: var(--transition);
-            box-shadow: 0 0 5px var(--neon-pink);
         }
         
         .hamburger:before {
@@ -298,7 +258,7 @@
             top: 8px;
         }
         
-        /* Gallery */
+        /* Gallery with Masonry Layout */
         .gallery {
             columns: 3;
             column-gap: 15px;
@@ -313,15 +273,11 @@
             border-radius: 8px;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            border: 1px solid rgba(5, 217, 232, 0.3);
         }
         
         .gallery-item:hover {
             transform: scale(1.02);
-            box-shadow: 
-                0 0 15px var(--neon-blue),
-                0 0 30px var(--neon-blue);
-            border-color: var(--neon-blue);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         
         .gallery-item img {
@@ -329,12 +285,10 @@
             height: auto;
             display: block;
             transition: transform 0.5s ease;
-            filter: grayscale(30%);
         }
         
         .gallery-item:hover img {
             transform: scale(1.1);
-            filter: grayscale(0%);
         }
         
         .gallery-item .overlay {
@@ -353,7 +307,7 @@
             opacity: 1;
         }
         
-        /* Sections */
+        /* Sections with Animated Borders */
         section {
             padding: 100px 20px;
             text-align: center;
@@ -368,9 +322,8 @@
             transform: translateX(-50%);
             width: 100px;
             height: 4px;
-            background: var(--neon-pink);
+            background: var(--accent);
             border-radius: 2px;
-            box-shadow: 0 0 10px var(--neon-pink);
         }
         
         section h2 {
@@ -378,8 +331,6 @@
             margin-bottom: 50px;
             position: relative;
             display: inline-block;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-blue);
         }
         
         section h2:after {
@@ -390,16 +341,11 @@
             transform: translateX(-50%);
             width: 50px;
             height: 3px;
-            background: var(--neon-purple);
-            box-shadow: 0 0 10px var(--neon-purple);
+            background: var(--secondary);
         }
         
         .about {
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border-top: 1px solid rgba(255, 42, 109, 0.2);
-            border-bottom: 1px solid rgba(5, 217, 232, 0.2);
+            background: var(--light);
         }
         
         .about-content {
@@ -415,60 +361,23 @@
             height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--neon-blue);
-            box-shadow: 
-                0 0 20px var(--neon-blue),
-                inset 0 0 20px var(--neon-blue);
+            border: 5px solid white;
+            box-shadow: var(--shadow);
             margin-bottom: 30px;
             transition: var(--transition);
-            filter: contrast(1.1);
         }
         
         .about-img:hover {
             transform: rotate(5deg) scale(1.05);
-            border-color: var(--neon-pink);
-            box-shadow: 
-                0 0 20px var(--neon-pink),
-                inset 0 0 20px var(--neon-pink);
         }
         
-        /* Social Links */
-        .social-links {
-            margin: 30px 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .social-links a {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            margin: 0 10px;
-            color: white;
-            font-size: 1.5rem;
-            line-height: 50px;
-            transition: var(--transition);
-            border: 1px solid transparent;
-        }
-        
-        .social-links a:hover {
-            background: var(--neon-purple);
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px var(--neon-purple);
-            border-color: var(--neon-purple);
-        }
-        
-        /* Footer */
+        /* Footer with Wave Shape */
         footer {
             position: relative;
-            background: var(--darker);
+            background: var(--dark);
             color: white;
             text-align: center;
             padding: 80px 20px 30px;
-            border-top: 1px solid rgba(5, 217, 232, 0.3);
         }
         
         .footer-wave {
@@ -489,13 +398,40 @@
         }
         
         .footer-wave .shape-fill {
-            fill: var(--dark);
+            fill: white;
         }
         
-        .footer-content h3 {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-blue);
-            margin-bottom: 10px;
+        .social-links {
+            margin: 30px 0;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            line-height: 50px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
         }
         
         /* Responsive Design */
@@ -528,7 +464,7 @@
             nav.active {
                 height: auto;
                 padding: 20px 0;
-                background: rgba(5, 5, 5, 0.98);
+                background: rgba(44, 62, 80, 0.95);
             }
             
             nav ul {
@@ -559,74 +495,76 @@
     </style>
 </head>
 <body>
-    <!-- Neon Background Elements -->
-    <div class="neon-grid"></div>
-    <div class="neon-glow glow-pink"></div>
-    <div class="neon-glow glow-blue"></div>
-    
-    <div class="menu-toggle" id="mobile-menu">
-        <div class="hamburger"></div>
-    </div>
-    
-    <nav id="main-nav">
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#about">About</a></li>
-        </ul>
-    </nav>
-    
-    <header id="home">
-        <div class="hero-content">
-            <h1 class="logo">Vision Photography</h1>
-            <p class="tagline">Visual Storytelling</p>
-            <a href="#portfolio" class="btn">View Portfolio</a>
+    <div class="parallax">
+        <div class="parallax__layer parallax__layer--back">
+            <div class="hero-bg"></div>
         </div>
-    </header>
+        <div class="parallax__layer parallax__layer--base">
+            <div class="menu-toggle" id="mobile-menu">
+                <div class="hamburger"></div>
+            </div>
+            
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+            
+            <header id="home">
+                <div class="hero-content">
+                    <h1 class="logo animate__animated animate__fadeInDown">Vision Photography</h1>
+                    <p class="tagline animate__animated animate__fadeInUp">Visual Storytelling Through Photography</p>
+                    <a href="#portfolio" class="btn animate__animated animate__fadeIn">View Portfolio</a>
+                </div>
+            </header>
+        </div>
+    </div>
     
     <section id="portfolio" class="gallery-section">
         <h2>Featured Work</h2>
         <div class="gallery">
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Portrait Photography">
+                <img src="https://scontent.fbom6-1.fna.fbcdn.net/v/t1.15752-9/508562495_1724911865061151_3028794402262250485_n.jpg?stp=dst-jpg_s1080x2048_tt6&_nc_cat=111&ccb=1-7&_nc_sid=0024fc&_nc_ohc=KNn7rTG2pcAQ7kNvwGOx1mf&_nc_oc=AdniXGA3wD5GcUqQxLL0vkzUmQIaj5iViqmD4B3fWzMNly48NGPTc9lyq2bh0T3ZQIw&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fbom6-1.fna&oh=03_Q7cD2gHJ-iQf84wtS20-Z7PQd-XutoQE5R98OBKJvFCB0k1CMg&oe=687FA5FC" alt="Portrait Photography">
                 <div class="overlay">
                     <h3>Portrait Series</h3>
-                    <p>Emotional depth captured in neon tones</p>
+                    <p>Emotional depth captured in black & white</p>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Landscape Photography">
+                <img src="https://scontent.fbom6-1.fna.fbcdn.net/v/t1.15752-9/510246755_2263980560728083_3019249672883358673_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=0024fc&_nc_ohc=4d-1Zk14GeQQ7kNvwE_s00h&_nc_oc=AdkXoKCDaJ43aenZPQ4Dev5KDRnJQCJReWTjDEyyX00TcKMCfLfuKO-qKXz1TvrDvxU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fbom6-1.fna&oh=03_Q7cD2gGZFCQ2L-_2tIkl2AzShkINTdQ7S73Z6gitGP3owD_rKA&oe=687FA9C6" alt="Landscape Photography">
                 <div class="overlay">
-                    <h3>Neon Landscapes</h3>
-                    <p>Breathtaking views with vibrant colors</p>
+                    <h3>Nature Landscapes</h3>
+                    <p>Breathtaking views from around the world</p>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1529310399831-ed472b81d589?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Event Photography">
+                <img src="https://images.unsplash.com/photo-1529310399831-ed472b81d589?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Wedding Photography">
                 <div class="overlay">
-                    <h3>Event Highlights</h3>
-                    <p>Capturing moments in vivid color</p>
+                    <h3>Wedding Moments</h3>
+                    <p>Capturing love stories authentically</p>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80" alt="Urban Photography">
+                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80" alt="Street Photography">
                 <div class="overlay">
-                    <h3>Urban Neon</h3>
-                    <p>Cityscapes with vibrant energy</p>
+                    <h3>Urban Stories</h3>
+                    <p>Life unfolding in city streets</p>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1517630800677-932d836ab680?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Creative Photography">
+                <img src="https://scontent.fbom6-1.fna.fbcdn.net/v/t1.15752-9/504901200_2144892249317905_63131746079223742_n.jpg?stp=dst-jpg_s1080x2048_tt6&_nc_cat=104&ccb=1-7&_nc_sid=0024fc&_nc_ohc=xIaJmPfzdwYQ7kNvwHHlAV1&_nc_oc=Adnrm8eKWTDlzc4FzM5c4tE2KoQ8IKNkMrCycTVThw-AOARslyu9Kukwv1rnctvnuNE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fbom6-1.fna&oh=03_Q7cD2gGaUf2pnXQiwEajLhHwcvaYNAqaIQAU_9af1uoLfjkbzA&oe=687FCE9D" alt="Product Photography">
                 <div class="overlay">
-                    <h3>Creative Concepts</h3>
-                    <p>Experimental neon photography</p>
+                    <h3>Product Showcase</h3>
+                    <p>Highlighting details and craftsmanship</p>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Abstract Photography">
+                <img src="https://scontent.fbom6-1.fna.fbcdn.net/v/t1.15752-9/506958015_1786293905656898_1993960263321867674_n.jpg?stp=dst-jpg_s1080x2048_tt6&_nc_cat=110&ccb=1-7&_nc_sid=0024fc&_nc_ohc=M5sYDYTyW90Q7kNvwHi9uEK&_nc_oc=AdnmgHMJOpS5p_Af_6TwqmAaCqr1PuYgtuEzpWyqmv2WumKwwZTGdtrk0HX8K7raO7Y&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fbom6-1.fna&oh=03_Q7cD2gHqShu3QiAGezDssBzJt5YA_YYDy-Pjt87qP5ZqvWDWKA&oe=687FC9FC" alt="Wildlife Photography">
                 <div class="overlay">
-                    <h3>Abstract Visions</h3>
-                    <p>Neon-inspired abstract work</p>
+                    <h3>Wildlife Encounters</h3>
+                    <p>Nature's beauty in its purest form</p>
                 </div>
             </div>
         </div>
@@ -635,14 +573,13 @@
     <section id="about" class="about">
         <h2>About Me</h2>
         <div class="about-content">
-            <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="John Doe" class="about-img">
-            <p>With over 10 years of experience in neon and low-light photography, I specialize in capturing vibrant, glowing moments that pulse with energy. My work blends technical precision with creative experimentation to produce images that electrify the senses.</p>
-            <p>Based in Tokyo, I travel worldwide to capture urban nightscapes and create stunning neon portraits. When not shooting, I experiment with light painting and teach workshops on night photography techniques.</p>
+            <img src="https://www.google.com/imgres?q=photographer%20img&imgurl=https%3A%2F%2Fimg.freepik.com%2Ffree-vector%2Fmale-photographer-with-camera-hand-drawn-sketch-vector_460848-14670.jpg%3Fsemt%3Dais_hybrid%26w%3D740&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fphotographer&docid=iBQKvenLexgReM&tbnid=UzvmStjWv1jT_M&vet=12ahUKEwjr3Yig1IWOAxVeb_UHHZ4xHeoQM3oECG4QAA..i&w=740&h=839&hcb=2&ved=2ahUKEwjr3Yig1IWOAxVeb_UHHZ4xHeoQM3oECG4QAA" alt="Swapnil" class="about-img floating">
+            <p>With over 10 years of experience behind the lens, I specialize in capturing authentic moments that tell a story. My approach combines technical expertise with artistic vision to create images that resonate emotionally.</p>
+            <p>Based in New York, I travel worldwide for assignments and personal projects. When not shooting, you can find me teaching photography workshops or exploring new techniques.</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-500px"></i></a>
-                <a href="#"><i class="fab fa-behance"></i></a>
-                <a href="#"><i class="fab fa-vimeo-v"></i></a>
+                <a href="https://www.instagram.com/sunny_24mp?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a herf="#"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </section>
@@ -654,9 +591,9 @@
             </svg>
         </div>
         <div class="footer-content">
-            <h3>John Doe Neon Photography</h3>
-            <p>Electrifying visual storytelling</p>
-            <p>&copy; 2023 John Doe Photography. All rights reserved.</p>
+            <h3>Vision Photography</h3>
+            <p>Capturing moments that last a lifetime</p>
+            <p>&copy; 2025 Vision Photography. All rights reserved.</p>
         </div>
     </footer>
     
@@ -673,10 +610,12 @@
             const hamburger = this.querySelector('.hamburger');
             if (this.classList.contains('active')) {
                 hamburger.style.transform = 'rotate(45deg)';
+                hamburger.style.background = 'var(--accent)';
                 hamburger.before.style.transform = 'rotate(-45deg) translate(-5px, 6px)';
                 hamburger.after.style.opacity = '0';
             } else {
                 hamburger.style.transform = 'rotate(0)';
+                hamburger.style.background = 'white';
                 hamburger.before.style.transform = 'rotate(0) translate(0, 0)';
                 hamburger.after.style.opacity = '1';
             }
@@ -733,22 +672,6 @@
         
         window.addEventListener('scroll', animateOnScroll);
         window.addEventListener('load', animateOnScroll);
-        
-        // Random neon color flicker effect
-        const neonElements = document.querySelectorAll('.logo, .tagline, h2, .btn, nav a');
-        
-        function randomFlicker() {
-            neonElements.forEach(el => {
-                if (Math.random() > 0.7) {
-                    el.style.animation = 'none';
-                    el.offsetHeight; // Trigger reflow
-                    el.style.animation = null;
-                }
-            });
-            setTimeout(randomFlicker, 3000);
-        }
-        
-        randomFlicker();
     </script>
 </body>
 </html>

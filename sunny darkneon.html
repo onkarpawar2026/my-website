@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Photography | Neon Visuals</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --neon-pink: #ff2a6d;
+            --neon-blue: #05d9e8;
+            --neon-purple: #d300c5;
+            --neon-cyan: #00f1ff;
+            --shadow: 0 0 10px rgba(5, 217, 232, 0.5);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--darker);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 42, 109, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(5, 217, 232, 0.15) 0%, transparent 30%);
+        }
+        
+        /* Neon Grid Background */
+        .neon-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)),
+                linear-gradient(90deg, var(--darker) 21px, transparent 1%) center,
+                linear-gradient(var(--darker) 21px, transparent 1%) center,
+                var(--neon-blue);
+            background-size: 22px 22px;
+            z-index: -2;
+            opacity: 0.3;
+        }
+        
+        /* Neon Glow Effects */
+        .neon-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .glow-pink {
+            background: var(--neon-pink);
+            top: -100px;
+            left: -100px;
+            animation: float-glow 8s ease-in-out infinite;
+        }
+        
+        .glow-blue {
+            background: var(--neon-blue);
+            bottom: -100px;
+            right: -100px;
+            animation: float-glow 10s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float-glow {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(50px, 50px); }
+            50% { transform: translate(0, 100px); }
+            75% { transform: translate(-50px, 50px); }
+            100% { transform: translate(0, 0); }
+        }
+        
+        header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 0;
+            color: white;
+            text-shadow: 
+                0 0 10px var(--neon-blue),
+                0 0 20px var(--neon-blue),
+                0 0 30px var(--neon-blue);
+            animation: neon-pulse 2s infinite alternate;
+        }
+        
+        @keyframes neon-pulse {
+            from {
+                text-shadow: 
+                    0 0 10px var(--neon-blue),
+                    0 0 20px var(--neon-blue),
+                    0 0 30px var(--neon-blue);
+            }
+            to {
+                text-shadow: 
+                    0 0 15px var(--neon-blue),
+                    0 0 25px var(--neon-cyan),
+                    0 0 35px var(--neon-blue);
+            }
+        }
+        
+        .tagline {
+            font-size: 1.8rem;
+            margin-top: 0;
+            font-weight: 300;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 5px var(--neon-cyan);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--neon-pink);
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-top: 30px;
+            transition: var(--transition);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border: 2px solid var(--neon-pink);
+            box-shadow: 
+                0 0 10px var(--neon-pink),
+                inset 0 0 10px var(--neon-pink);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            color: var(--darker);
+            background: var(--neon-pink);
+            box-shadow: 
+                0 0 20px var(--neon-pink),
+                inset 0 0 20px var(--neon-pink);
+            transform: translateY(-3px);
+        }
+        
+        .btn:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .btn:hover:after {
+            transform: translateX(0);
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 20px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            border-bottom: 1px solid rgba(255, 42, 109, 0.3);
+        }
+        
+        nav.scrolled {
+            background: rgba(5, 5, 5, 0.95);
+            padding: 15px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav ul li {
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 5px 10px;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 5px var(--neon-cyan);
+        }
+        
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255, 42, 109, 0.3);
+            border-radius: 5px;
+            border: 1px solid var(--neon-pink);
+        }
+        
+        .hamburger {
+            width: 30px;
+            height: 3px;
+            background: var(--neon-pink);
+            position: relative;
+            transition: var(--transition);
+            box-shadow: 0 0 5px var(--neon-pink);
+        }
+        
+        .hamburger:before,
+        .hamburger:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: var(--neon-pink);
+            transition: var(--transition);
+            box-shadow: 0 0 5px var(--neon-pink);
+        }
+        
+        .hamburger:before {
+            top: -8px;
+        }
+        
+        .hamburger:after {
+            top: 8px;
+        }
+        
+        /* Gallery */
+        .gallery {
+            columns: 3;
+            column-gap: 15px;
+            padding: 50px;
+        }
+        
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(5, 217, 232, 0.3);
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 
+                0 0 15px var(--neon-blue),
+                0 0 30px var(--neon-blue);
+            border-color: var(--neon-blue);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+            filter: grayscale(30%);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+        
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+        
+        /* Sections */
+        section {
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--neon-pink);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--neon-purple);
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
+        
+        .about {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 42, 109, 0.2);
+            border-bottom: 1px solid rgba(5, 217, 232, 0.2);
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .about-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--neon-blue);
+            box-shadow: 
+                0 0 20px var(--neon-blue),
+                inset 0 0 20px var(--neon-blue);
+            margin-bottom: 30px;
+            transition: var(--transition);
+            filter: contrast(1.1);
+        }
+        
+        .about-img:hover {
+            transform: rotate(5deg) scale(1.05);
+            border-color: var(--neon-pink);
+            box-shadow: 
+                0 0 20px var(--neon-pink),
+                inset 0 0 20px var(--neon-pink);
+        }
+        
+        /* Social Links */
+        .social-links {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            line-height: 50px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        
+        .social-links a:hover {
+            background: var(--neon-purple);
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px var(--neon-purple);
+            border-color: var(--neon-purple);
+        }
+        
+        /* Footer */
+        footer {
+            position: relative;
+            background: var(--darker);
+            color: white;
+            text-align: center;
+            padding: 80px 20px 30px;
+            border-top: 1px solid rgba(5, 217, 232, 0.3);
+        }
+        
+        .footer-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+        
+        .footer-wave svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 80px;
+        }
+        
+        .footer-wave .shape-fill {
+            fill: var(--dark);
+        }
+        
+        .footer-content h3 {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-blue);
+            margin-bottom: 10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .gallery {
+                columns: 2;
+            }
+            
+            .logo {
+                font-size: 3rem;
+            }
+            
+            .tagline {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                padding: 0;
+                height: 0;
+                overflow: hidden;
+                transition: height 0.3s ease;
+            }
+            
+            nav.active {
+                height: auto;
+                padding: 20px 0;
+                background: rgba(5, 5, 5, 0.98);
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .gallery {
+                columns: 1;
+                padding: 20px;
+            }
+            
+            section {
+                padding: 60px 20px;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Neon Background Elements -->
+    <div class="neon-grid"></div>
+    <div class="neon-glow glow-pink"></div>
+    <div class="neon-glow glow-blue"></div>
+    
+    <div class="menu-toggle" id="mobile-menu">
+        <div class="hamburger"></div>
+    </div>
+    
+    <nav id="main-nav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </nav>
+    
+    <header id="home">
+        <div class="hero-content">
+            <h1 class="logo">Vision Photography</h1>
+            <p class="tagline">Visual Storytelling</p>
+            <a href="#portfolio" class="btn">View Portfolio</a>
+        </div>
+    </header>
+    
+    <section id="portfolio" class="gallery-section">
+        <h2>Featured Work</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Portrait Photography">
+                <div class="overlay">
+                    <h3>Portrait Series</h3>
+                    <p>Emotional depth captured in neon tones</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Landscape Photography">
+                <div class="overlay">
+                    <h3>Neon Landscapes</h3>
+                    <p>Breathtaking views with vibrant colors</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1529310399831-ed472b81d589?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Event Photography">
+                <div class="overlay">
+                    <h3>Event Highlights</h3>
+                    <p>Capturing moments in vivid color</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80" alt="Urban Photography">
+                <div class="overlay">
+                    <h3>Urban Neon</h3>
+                    <p>Cityscapes with vibrant energy</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1517630800677-932d836ab680?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Creative Photography">
+                <div class="overlay">
+                    <h3>Creative Concepts</h3>
+                    <p>Experimental neon photography</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Abstract Photography">
+                <div class="overlay">
+                    <h3>Abstract Visions</h3>
+                    <p>Neon-inspired abstract work</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="John Doe" class="about-img">
+            <p>With over 10 years of experience in neon and low-light photography, I specialize in capturing vibrant, glowing moments that pulse with energy. My work blends technical precision with creative experimentation to produce images that electrify the senses.</p>
+            <p>Based in Tokyo, I travel worldwide to capture urban nightscapes and create stunning neon portraits. When not shooting, I experiment with light painting and teach workshops on night photography techniques.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-500px"></i></a>
+                <a href="#"><i class="fab fa-behance"></i></a>
+                <a href="#"><i class="fab fa-vimeo-v"></i></a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class="footer-content">
+            <h3>John Doe Neon Photography</h3>
+            <p>Electrifying visual storytelling</p>
+            <p>&copy; 2023 John Doe Photography. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('mobile-menu');
+        const mainNav = document.getElementById('main-nav');
+        
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mainNav.classList.toggle('active');
+            
+            // Animate hamburger to X
+            const hamburger = this.querySelector('.hamburger');
+            if (this.classList.contains('active')) {
+                hamburger.style.transform = 'rotate(45deg)';
+                hamburger.before.style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                hamburger.after.style.opacity = '0';
+            } else {
+                hamburger.style.transform = 'rotate(0)';
+                hamburger.before.style.transform = 'rotate(0) translate(0, 0)';
+                hamburger.after.style.opacity = '1';
+            }
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Close mobile menu if open
+                if (mainNav.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    mainNav.classList.remove('active');
+                }
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animate elements when they come into view
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.gallery-item, .about-img');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.gallery-item, .about-img').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+        
+        // Random neon color flicker effect
+        const neonElements = document.querySelectorAll('.logo, .tagline, h2, .btn, nav a');
+        
+        function randomFlicker() {
+            neonElements.forEach(el => {
+                if (Math.random() > 0.7) {
+                    el.style.animation = 'none';
+                    el.offsetHeight; // Trigger reflow
+                    el.style.animation = null;
+                }
+            });
+            setTimeout(randomFlicker, 3000);
+        }
+        
+        randomFlicker();
+    </script>
+</body>
+</html>
